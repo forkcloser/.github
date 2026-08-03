@@ -4,7 +4,7 @@ Got ideas? Found a bug you can fix? Go for it.
 
 ## First: does this belong upstream?
 
-Most repositories here are **forks**. Before opening a pull request, ask where the change
+Every repository here is a **fork**. Before opening a pull request, ask where the change
 really belongs:
 
 - **The bug or feature exists in the upstream project too** → send it upstream. It helps

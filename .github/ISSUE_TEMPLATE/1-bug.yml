@@ -13,8 +13,8 @@ body:
         **Not for security issues** — do not report a vulnerability here. See
         [SECURITY.md](https://github.com/forkcloser/.github/blob/main/.github/SECURITY.md).
 
-        Most repositories here are forks. If the bug is upstream's too, upstream is
-        usually the better place to report it — see the question below.
+        Everything here is a fork. If the bug is upstream's too, upstream is usually
+        the better place to report it — see the question below.
   - type: input
     id: version
     attributes:
@@ -28,13 +28,12 @@ body:
     attributes:
       label: Does this reproduce on the upstream project?
       description: >
-        The repository's README says what it is a fork of. If the bug is upstream's, reporting it there fixes it for everyone — but tell us either way and we will track it. "Not applicable" is the right answer for repositories that are not forks.
+        The repository's README says what it is a fork of. If the bug is upstream's, reporting it there fixes it for everyone — but tell us either way and we will track it.
       multiple: false
       options:
         - "Yes — it reproduces upstream too"
         - "No — upstream is fine, this is specific to the fork"
         - "I did not check"
-        - "Not applicable — this project is not a fork"
     validations:
       required: true
   - type: dropdown

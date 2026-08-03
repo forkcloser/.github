@@ -4,7 +4,7 @@
 
 **Do not open a public issue for a security vulnerability.**
 
-Most repositories here are **forks**, so the code you found the flaw in may not be ours.
+Every repository here is a **fork**, so the code you found the flaw in may not be ours.
 Which it is changes who can actually fix it, and how many people benefit.
 
 ### If the flaw is in the upstream project

@@ -20,14 +20,11 @@ possible or not timely — not because we think we own the code.
 - [**grid-clock-screensaver**](https://github.com/forkcloser/grid-clock-screensaver) — a fork
   of [chrstphrknwtn/grid-clock-screensaver](https://github.com/chrstphrknwtn/grid-clock-screensaver),
   a word-clock screensaver for macOS, ported to modern macOS.
-
-## Original work
-
-Not everything here is a fork — this one started in-house:
-
-- [**erofs**](https://github.com/forkcloser/erofs) — a pure-Go library for reading and
+- [**erofs**](https://github.com/forkcloser/erofs) — a fork of
+  [dmcgowan/go-erofs](https://github.com/dmcgowan/go-erofs): a pure-Go library for reading and
   creating [EROFS](https://erofs.docs.kernel.org/en/latest/) filesystem images through the
-  standard `fs.FS` interface. No CGO.
+  standard `fs.FS` interface, no CGO. Our work here is mostly hardening — bounding
+  allocations driven by untrusted image fields — plus writer and metadata additions.
 
 ## Contributing & support
 
