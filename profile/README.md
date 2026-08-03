@@ -13,18 +13,26 @@ possible or not timely — not because we think we own the code.
 ## Forks
 
 - [**xz**](https://github.com/forkcloser/xz) — a fork of
-  [ulikunitz/xz](https://github.com/ulikunitz/xz) with substantial decoding performance work:
-  roughly double the serial decode speed, and about 20× on multiblock archives via parallel
-  block decoding. Upstream appears inactive; the changes are deliberately kept in a shape
-  that could be carried over if anyone has the time.
+  [ulikunitz/xz](https://github.com/ulikunitz/xz), in two passes. First decoding speed: the
+  per-operation allocations removed, a branchless range decoder, match copies by pattern
+  doubling, and a `ParallelReader` that decodes the blocks of a multiblock archive
+  concurrently. Then robustness against archives that were built to break a decoder —
+  impossible sizes rejected, the stream index read incrementally and bounded so the
+  backwards walk terminates, the dictionary grown on demand rather than up front, and
+  `Close` able to cancel a read already blocked in a worker. Upstream appears inactive; the
+  changes are deliberately kept in a shape that could be carried over if anyone has the time.
+- [**erofs**](https://github.com/forkcloser/erofs) — a fork of
+  [erofs/go-erofs](https://github.com/erofs/go-erofs): a pure-Go library for reading and
+  creating [EROFS](https://erofs.docs.kernel.org/en/latest/) filesystem images through the
+  standard `fs.FS` interface, no CGO. The work here is mostly about surviving images we did
+  not write — allocations bounded by what the image can physically hold, cyclic directory
+  graphs and oversized directory and symlink sizes rejected — alongside correctness fixes
+  (`fs.FS` contract conformance, chunk extents mapped at block granularity with holes
+  preserved, setuid/setgid/sticky bits kept on both the read and write paths) and additions
+  to the writer.
 - [**grid-clock-screensaver**](https://github.com/forkcloser/grid-clock-screensaver) — a fork
   of [chrstphrknwtn/grid-clock-screensaver](https://github.com/chrstphrknwtn/grid-clock-screensaver),
   a word-clock screensaver for macOS, ported to modern macOS.
-- [**erofs**](https://github.com/forkcloser/erofs) — a fork of
-  [dmcgowan/go-erofs](https://github.com/dmcgowan/go-erofs): a pure-Go library for reading and
-  creating [EROFS](https://erofs.docs.kernel.org/en/latest/) filesystem images through the
-  standard `fs.FS` interface, no CGO. Our work here is mostly hardening — bounding
-  allocations driven by untrusted image fields — plus writer and metadata additions.
 
 ## Contributing & support
 
