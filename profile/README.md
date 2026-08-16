@@ -30,6 +30,15 @@ possible or not timely — not because we think we own the code.
   (`fs.FS` contract conformance, chunk extents mapped at block granularity with holes
   preserved, setuid/setgid/sticky bits kept on both the read and write paths) and additions
   to the writer.
+- [**blake3**](https://github.com/forkcloser/blake3) — a fork of
+  [lukechampine/blake3](https://github.com/lukechampine/blake3), a Go implementation of the
+  BLAKE3 hash with AVX2/AVX-512 routines and the `bao` verified-streaming encoding. The
+  changes come out of an audit of the tree: an XOF `Seek` to almost any buffer-unaligned
+  offset returned output from the wrong position (latent since 2020), `bao` slice bounds
+  could overflow past validation and the empty encoding was rejected, `New` now validates
+  its key and size instead of panicking deep inside, and the allocation and parallelism
+  behaviour is tuned so small XOF reads and streaming writes stop paying for work they do
+  not use.
 - [**grid-clock-screensaver**](https://github.com/forkcloser/grid-clock-screensaver) — a fork
   of [chrstphrknwtn/grid-clock-screensaver](https://github.com/chrstphrknwtn/grid-clock-screensaver),
   a word-clock screensaver for macOS, ported to modern macOS.
