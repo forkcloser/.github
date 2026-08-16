@@ -20,4 +20,4 @@ test:
 # Shell plus the aqua-pinned yq: no unpinned interpreter, and shellcheck lints
 # the script like any other we ship.
 issue-forms:
-    @.github/workflows/validate-issue-forms.sh
+    @.github/scripts/validate-issue-forms.sh
