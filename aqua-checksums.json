@@ -46,28 +46,28 @@
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/farcloser/limen/v0.0.13/limen_0.0.13_darwin_arm64.tar.gz",
-      "checksum": "8739EA67AE2404A33E56EC9E89DE228C4DB73BFE37E2E814D7592289576FDBF8",
+      "id": "github_release/github.com/farcloser/limen/v0.0.16/limen_0.0.16_darwin_arm64.tar.gz",
+      "checksum": "529FB618F0E880DF5EFC4C208180EFBA7C9421460829193D7A6FA7DC78AAE70E",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/farcloser/limen/v0.0.13/limen_0.0.13_linux_amd64.tar.gz",
-      "checksum": "C5A3990CF1307CB14DA8986FF45AD634A569DD35B3E536F7694C7BD9E9BF4557",
+      "id": "github_release/github.com/farcloser/limen/v0.0.16/limen_0.0.16_linux_amd64.tar.gz",
+      "checksum": "9A2F747BF0EB89BAF1FDB578F2420BD3F18F92EDAD6BC1CE218EF4B45D255040",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/farcloser/limen/v0.0.13/limen_0.0.13_linux_arm64.tar.gz",
-      "checksum": "6D19477293359E262C2E6E882974355B1F339A5249EBC1D42620783BBD23B3B0",
+      "id": "github_release/github.com/farcloser/limen/v0.0.16/limen_0.0.16_linux_arm64.tar.gz",
+      "checksum": "09FA9D982731750B7C64B4024B28998007C90A72527880C16A0FFDFD53815570",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/farcloser/limen/v0.0.13/limen_0.0.13_windows_amd64.tar.gz",
-      "checksum": "942522F4AB937B9DDDCFE2E369E2AF13AF64C1041934CA20D098AA9C8321FC20",
+      "id": "github_release/github.com/farcloser/limen/v0.0.16/limen_0.0.16_windows_amd64.tar.gz",
+      "checksum": "BB54B101F957872AE24E5D99EB0C8F8117C09604669056F2F2C4A9A9AFC288E9",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/farcloser/limen/v0.0.13/limen_0.0.13_windows_arm64.tar.gz",
-      "checksum": "C331B8BA5495406BC1A5C6DB62549B4AB562FDD808DFB71B18D3FD6ADE3FCE42",
+      "id": "github_release/github.com/farcloser/limen/v0.0.16/limen_0.0.16_windows_arm64.tar.gz",
+      "checksum": "B6047BBE537D439C75CDC2356F8A7CF4DFFDFF0BFB6CF019FBF0D1AC46E9B293",
       "algorithm": "sha256"
     },
     {
