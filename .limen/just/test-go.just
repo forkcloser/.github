@@ -47,8 +47,36 @@ unit: (_banner "test go" "unit")
 # ("relocation target stderr not defined") — see golang/go#52690, #54313,
 # #58619. On macOS with Xcode 15+, ld emits "has malformed LC_DYSYMTAB"
 # warnings for race builds; cosmetic, the binaries are correct (golang/go#61229).
+#
+# The detector does not exist everywhere. It is a prebuilt LLVM
+# ThreadSanitizer runtime that Go vendors per platform (runtime/race/*.syso),
+# and LLVM ships none for windows/arm64 among others — so on those hosts
+# `-race` is not a slow option but a missing one, and `go build -race`
+# refuses before compiling a line ("-race is not supported on GOOS/GOARCH").
+# That refusal is the probe: ask the toolchain, rather than keep a platform
+# list that drifts as Go and LLVM add targets. The check is host-level, made
+# before any package is looked at, so probing `unsafe` — a package with no
+# source to compile — costs milliseconds and answers exactly the same as
+# probing the module would. On such a host the recipe
+# says so, loudly, and passes: a red leg would re-report a Go limitation on
+# every push, and a silent green would hide a coverage gap that is real —
+# this leg's race coverage is absent (the other legs' is not: the linux and
+# macos arm64 legs run the detector natively). The skip is keyed to that
+# exact message: any other failure of the probe build is a real one and
+# fails the recipe as before.
 race: (_banner "test go" "race")
-    CGO_ENABLED=1 gotestsum -- -count=1 -timeout "${TEST_GO_TIMEOUT:-10m}" -ldflags=-linkmode=external -race ./...
+    #!/usr/bin/env bash
+    set -euo pipefail
+    export CGO_ENABLED=1
+    if ! probe="$(go build -race -o /dev/null unsafe 2>&1)"; then
+        if printf '%s\n' "$probe" | grep -q -- '-race is not supported'; then
+            echo "race: SKIPPED — no race detector for $(go env GOOS)/$(go env GOARCH); ${probe}" >&2
+            exit 0
+        fi
+        printf '%s\n' "$probe" >&2
+        exit 1
+    fi
+    gotestsum -- -count=1 -timeout "${TEST_GO_TIMEOUT:-10m}" -ldflags=-linkmode=external -race ./...
 
 # Benchmarks, with allocation stats. -run '^$' deselects unit tests so only
 # benchmarks run — `just do test go` already covers the tests themselves.
@@ -181,25 +209,30 @@ profile: (_banner "test go" "profile")
         echo "  -> $png"
     }
     for pkg in $(go list ./...); do
-        # Filename-safe name from the FULL import path, not just the last segment:
-        # example/a/client and example/b/client both end in "client" and would
-        # otherwise overwrite each other's binary and profiles. '/' -> '__'; the
-        # only other char a Go import path carries that matters here is '.', which
-        # is already filename-safe.
-        name=${pkg//\//__}
+        # One directory per package, keyed by the FULL import path used as a
+        # path: example/a/client and example/b/client both end in "client" and
+        # would otherwise overwrite each other's binary and profiles, and any
+        # flattening of the path into a file name ('/' -> '__' and the like) has
+        # the same problem one level down, since '_', '-', '.' and '~' are all
+        # legal in an import path (example/a__b vs example/a/b). The tree is the
+        # one encoding with nothing to collide, and it reads as the package does.
+        # Ancestor packages get their own files (cpu.prof, ...) next to the
+        # child's directory, never inside it. Paths stay cwd-relative for the
+        # WASM dot's sake (see render).
+        mkdir -p "$prof/$pkg" "$docs/$pkg"
         echo "Profiling $pkg..."
-        go test -count=1 -o "$prof/$name.test" "$pkg" \
-            -cpuprofile "$prof/${name}_cpu.prof" \
-            -memprofile "$prof/${name}_mem.prof" || true
-        if [ -s "$prof/${name}_cpu.prof" ]; then
+        go test -count=1 -o "$prof/$pkg/pkg.test" "$pkg" \
+            -cpuprofile "$prof/$pkg/cpu.prof" \
+            -memprofile "$prof/$pkg/mem.prof" || true
+        if [ -s "$prof/$pkg/cpu.prof" ]; then
             echo "  CPU profile (top 20):"
-            go tool pprof -top -nodecount=20 "$prof/${name}_cpu.prof" 2>/dev/null || true
-            render "$prof/${name}_cpu.prof" "$docs/${name}_cpu.png"
+            go tool pprof -top -nodecount=20 "$prof/$pkg/cpu.prof" 2>/dev/null || true
+            render "$prof/$pkg/cpu.prof" "$docs/$pkg/cpu.png"
         fi
-        if [ -s "$prof/${name}_mem.prof" ]; then
+        if [ -s "$prof/$pkg/mem.prof" ]; then
             echo "  Memory profile — alloc_space (top 20):"
-            go tool pprof -top -nodecount=20 -alloc_space "$prof/${name}_mem.prof" 2>/dev/null || true
-            render "$prof/${name}_mem.prof" "$docs/${name}_alloc.png" -alloc_space
+            go tool pprof -top -nodecount=20 -alloc_space "$prof/$pkg/mem.prof" 2>/dev/null || true
+            render "$prof/$pkg/mem.prof" "$docs/$pkg/alloc.png" -alloc_space
         fi
     done
     echo "Profiles written to $prof/, diagrams to $docs/"
