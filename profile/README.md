@@ -43,6 +43,19 @@ possible or not timely — not because we think we own the code.
   of [chrstphrknwtn/grid-clock-screensaver](https://github.com/chrstphrknwtn/grid-clock-screensaver),
   a word-clock screensaver for macOS, ported to modern macOS.
 
+## Rewrites
+
+Not forks: tools we reimplemented from scratch because the upstream one could not be
+consumed as pinned, versioned tooling. Our own code, our own licence, credit to the
+project whose interface they follow.
+
+- [**dot**](https://github.com/forkcloser/dot) — a Graphviz `dot` command as one static Go
+  binary, on [go-graphviz](https://github.com/goccy/go-graphviz)'s WebAssembly build of
+  Graphviz: `-K`, `-T` (dot, svg, png, jpg) and `-o`, file or standard input, file or
+  standard output. go-graphviz's own `dot` lives in a nested module that has never been
+  tagged and pins the library five releases back, so a tool directive on it cannot move;
+  this one is tagged and tracks the library like any other dependency.
+
 ## Contributing & support
 
 Projects here are provided as-is, best-effort, without warranty.
