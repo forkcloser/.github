@@ -56,6 +56,20 @@ project whose interface they follow.
   tagged and pins the library five releases back, so a tool directive on it cannot move;
   this one is tagged and tracks the library like any other dependency.
 
+## Packagings
+
+Upstream code, our packaging: nothing rewritten, nothing forked, only built or
+imported at an audited pin and published so the fleet can pin it by checksum
+and attestation.
+
+- [**curl**](https://github.com/forkcloser/curl) — one `curl` with dependable
+  TLS 1.3 for every platform, from [curl-for-win](https://github.com/curl/curl-for-win),
+  the curl project's own reproducible-build system: the Windows packages are
+  the official builds, imported and sigstore-verified against a vendored key;
+  linux (static musl) and macOS (arm64) are built by curl-for-win's scripts at
+  the same commit pin. Exists because no single upstream channel covers all
+  the platforms the toolchain runs on.
+
 ## Contributing & support
 
 Projects here are provided as-is, best-effort, without warranty.
