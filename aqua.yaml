@@ -37,3 +37,5 @@ packages:
   - name: mikefarah/yq@v4.53.6
   - name: uutils/coreutils@0.11.0
     registry: local
+  - name: quint-co/quint@v0.32.0 # renovate: depName=quint-co/quint
+    registry: local
