@@ -98,7 +98,7 @@ Run the project's own checks. **Repositories here differ**, deliberately — a f
 upstream's build so our patches stay easy to send back, and rebuilding it in our own shape
 would be the first step toward a divergence nobody can merge. Check the README, then:
 
-- **If the repository has a `Justfile`** it is governed by
+- **If the repository has a `.justfile`** it is governed by
   [`limen`](https://github.com/farcloser/limen), and `just lint` / `just test` run the same
   pinned tooling CI runs — green locally means green in CI. `just --list` shows the rest, and
   `aqua` fetches the tools on first use, so there is nothing to install by hand.
@@ -128,7 +128,7 @@ With `commit.gpgsign` set, every commit is signed without you thinking about it.
 single commit explicitly, use `git commit -S -s`; to sign a branch you already wrote,
 `git rebase --exec 'git commit --amend --no-edit -S' origin/main`.
 
-Repositories ship an `.allowed_signers` file mapping identities to public keys, so
+Repositories ship a `.lint-signers` file mapping identities to public keys, so
 `git log --show-signature` and `git tag -v` resolve locally. Add your key to it in the same
 pull request as your first contribution:
 
