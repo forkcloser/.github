@@ -6,6 +6,8 @@ import '.limen/just/main.just'
 # The FIRST recipe defined here becomes `just`'s default.
 lint: do::lint::default issue-forms
 fix: do::fix::default
+# The security workflow runs `just security`.
+security: do::security::default
 test:
 
 # Validate the GitHub issue forms against the form schema.
