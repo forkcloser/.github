@@ -35,7 +35,7 @@ inheriting them is the whole point.
 - [ ] Commits are signed off (`git commit -s`) — see
       [CONTRIBUTING.md](https://github.com/forkcloser/.github/blob/main/.github/CONTRIBUTING.md)
 - [ ] Commits are cryptographically signed (`commit.gpgsign`), and my key is in
-      `.allowed_signers`
+      `.lint-signers`
 - [ ] Subject lines are under 90 characters, no trailing whitespace
 - [ ] Branch is rebased on `main` (no merge commits)
 - [ ] This is not a security fix — those go through
