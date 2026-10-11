@@ -42,6 +42,14 @@ possible or not timely — not because we think we own the code.
 - [**grid-clock-screensaver**](https://github.com/forkcloser/grid-clock-screensaver) — a fork
   of [chrstphrknwtn/grid-clock-screensaver](https://github.com/chrstphrknwtn/grid-clock-screensaver),
   a word-clock screensaver for macOS, ported to modern macOS.
+- [**go-graphviz**](https://github.com/forkcloser/go-graphviz) — a fork of
+  [goccy/go-graphviz](https://github.com/goccy/go-graphviz): Go bindings for Graphviz with
+  the real Graphviz compiled to WebAssembly and run on wazero, no C toolchain and no system
+  Graphviz. The changes are about trusting the blob: Graphviz and expat are built from
+  pinned, digest-checked sources with a pinned wasi-sdk and binaryen, reproducibly, so two
+  builders produce the same bytes and CI proves it on every change; the bridge's failures
+  are typed errors a caller can match; the `dot` binary of upstream's nested module is
+  replaced by [dot](https://github.com/forkcloser/dot) below.
 
 ## Rewrites
 
@@ -56,6 +64,14 @@ project whose interface they follow.
   tagged and pins the library five releases back, so a tool directive on it cannot move;
   this one is tagged and tracks the library like any other dependency.
 
+- [**godolint**](https://github.com/forkcloser/godolint) — a Dockerfile linter in Go that
+  follows [hadolint](https://github.com/hadolint/hadolint), rule for rule: the rule
+  metadata and the test cases are generated from hadolint's Haskell sources at a pinned
+  release, so a hadolint bump shows exactly which rules moved, and the pragmas, the shell
+  analysis of `RUN` lines and the optional shellcheck integration are ported to match. One
+  static binary and an SDK, where hadolint needs a Haskell toolchain to build and a
+  container to run.
+
 ## Packagings
 
 Upstream code, our packaging: nothing rewritten, nothing forked, only built or
@@ -69,6 +85,28 @@ and attestation.
   linux (static musl) and macOS (arm64) are built by curl-for-win's scripts at
   the same commit pin. Exists because no single upstream channel covers all
   the platforms the toolchain runs on.
+- [**openssh**](https://github.com/forkcloser/openssh) — OpenSSH for macOS with
+  security keys built in, which Apple's build lacks: OpenSSH portable without
+  OpenSSL, libfido2 and libcbor linked statically, LibreSSL's libcrypto under
+  libfido2 only, Apple's clang, one relocatable package per release. A small
+  patch makes the binaries find their configuration and helpers beside
+  themselves, so the package runs from wherever aqua unpacks it; it ships a
+  strict client configuration, the agent as a user LaunchAgent, and the
+  server off by default, user-scoped when on.
+
+## Sites and infrastructure
+
+The organisation's own, not forks: what serves and what provisions.
+
+- [**website-godolint**](https://github.com/forkcloser/website-godolint) — the website
+  for godolint at [godolint.forkcloser.org](https://godolint.forkcloser.org/): two static
+  pages, no build step, no third-party requests, the sample Dockerfile on the landing page
+  annotated by the pinned `godolint` itself.
+- [**infra**](https://github.com/forkcloser/infra) — the infrastructure behind the
+  websites, as code: one zone per domain, one block per site; OpenTofu holds the
+  Cloudflare Pages projects and their domains, and `dnsctl`, a Go program in the
+  repository, makes the DNS and registrar accounts match `zones.yaml`, delegation and
+  DNSSEC included. A pull request adds a site; the apply on `main` creates it.
 
 ## Contributing & support
 
