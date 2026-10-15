@@ -82,15 +82,20 @@ use the body to explain *why* — the diff already says what.
 
 ## Pull requests
 
-- **Always a pull request.** Nobody pushes to `main`, including maintainers. The PR is the
-  audit trail and the CI gate, not only a review venue — a solo project merging its own
-  green PR is working as intended.
-- **Linear history.** Merge commits are disallowed; `squash` and `rebase` are the available
-  merge methods. Rebase onto `main` rather than merging `main` into your branch.
+- **Always a pull request.** Nobody pushes to `main`, including maintainers. The pull
+  request is the audit trail and the CI gate, and it merges with one approval and green
+  checks; an author cannot approve their own.
+- **Your branch stays linear.** Rebase onto `main` rather than merging `main` into your
+  branch: a pull request is read commit by commit, one commit per concern, and a merge
+  commit in it says nothing. The maintainer merges the approved pull request with a merge
+  commit; its title is the release note, so write it as one.
 - **CI must be green.** Required status checks block the merge button. Do not ask for an
   exception; fix the check or explain why the check is wrong.
-- **Force-pushing your own branch is fine** and often the right move after review. Force-push
-  and deletion are blocked on `main` only.
+- **Force-pushing your own branch is fine** and often the right move after review; use
+  `git push --force-with-lease`. Force-push and deletion are blocked on `main` only.
+- **New to this?** [GIT.md](https://github.com/farcloser/.github/blob/main/.github/GIT.md)
+  is the companion: amending, rebasing, editing a commit in the middle of a branch,
+  force-pushing safely.
 
 ## Before you open it
 
@@ -115,7 +120,10 @@ yours.
 signature is proof the commit came from your key. We require both.
 
 We sign with SSH keys, preferably backed by a hardware token (YubiKey and other `sk-`
-keys). Configure git once:
+keys); why one hardware-bound key for both authentication and signing, and what to do
+when the token is lost, is the book's
+[Identity and keys](https://github.com/farcloser/limen/blob/main/book/identity.md).
+Configure git once:
 
 ```
 git config --global gpg.format ssh
