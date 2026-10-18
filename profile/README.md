@@ -5,7 +5,9 @@ Friendly forks of upstream projects.
 When an upstream project we depend on is unmaintained, slow to move, or simply missing
 something we need, we fork it here rather than vendoring a patch and forgetting about it.
 The fork stays honest about what it is: upstream keeps the credit, the licence stays
-upstream's, and every change is one we would happily see merged back.
+upstream's, and what differs from upstream is written down, change by change. Not every
+change is upstream's to take: some align a fork with our own lint baseline or replace a
+library, and those are ours to carry.
 
 **If you can get a fix upstream, do that first.** These forks exist because that was not
 possible or not timely — not because we think we own the code.
