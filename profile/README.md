@@ -58,6 +58,14 @@ upstream since, and every fix and feature upstream does not have.
 - [**grid-clock-screensaver**](https://github.com/forkcloser/grid-clock-screensaver) — a fork
   of [chrstphrknwtn/grid-clock-screensaver](https://github.com/chrstphrknwtn/grid-clock-screensaver),
   a word-clock screensaver for macOS, ported to modern macOS.
+- [**vz**](https://github.com/forkcloser/vz) — a fork of
+  [Code-Hex/vz](https://github.com/Code-Hex/vz), the Go binding for Apple's
+  Virtualization.framework, for the hosts ossein and zerogravity run on: Apple silicon,
+  the current macOS, darwin only. The fork gives each virtual machine its own vmnet
+  network (upstream's unmerged pull request 205), a virtio socket that closes without
+  deadlocking and can half-close, a build that fails on the wrong SDK instead of booting
+  a VM with no network, the macOS-guest provisioning bindings upstream does not have yet,
+  and only the devices its consumers call. Each change with its reason is in `FORK.md`.
 - [**xz**](https://github.com/forkcloser/xz) — a fork of
   [ulikunitz/xz](https://github.com/ulikunitz/xz), in two passes. First decoding speed: the
   per-operation allocations removed, a branchless range decoder, match copies by pattern
