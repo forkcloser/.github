@@ -1,5 +1,7 @@
 # Forkcloser
 
+![A fork, on a table](fork.jpg)
+
 Friendly forks of upstream projects.
 
 When an upstream project we depend on is unmaintained, slow to move, or simply missing
