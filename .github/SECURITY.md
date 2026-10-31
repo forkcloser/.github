@@ -29,8 +29,8 @@ confidential until a fix exists, and it is where the advisory — and a CVE, if 
 warranted — is published from.
 
 If the repository has no Security tab (it should — that would be an error on our side),
-report it privately against
-[`forkcloser/erofs`](https://github.com/forkcloser/erofs/security/advisories/new) instead and
+report it privately against this repository,
+[`forkcloser/.github`](https://github.com/forkcloser/.github/security/advisories/new), and
 say which repository you meant.
 
 **Not sure which it is?** Report it to us and say so. Working out whether a flaw predates our
