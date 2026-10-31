@@ -106,6 +106,11 @@ and attestation.
   agent as a user LaunchAgent, and the server off by default, user-scoped when
   on.
 
+- [**testbin**](https://github.com/forkcloser/testbin) — test-only builds of C tools
+  other repositories need in their tests (`mkfs.erofs`, FLAC encoders and decoders), each
+  from pinned upstream sources under upstream's licence. Nothing here is shipped or
+  supported.
+
 ## Own projects
 
 Not forks: our own code, our own licence. Two follow the interface of a project that could
@@ -147,15 +152,12 @@ nothing upstream did the job.
 
 The organisation's own, not forks: what serves and what provisions.
 
-- [**website**](https://github.com/forkcloser/website) — the repository where
-  forkcloser.org, the organisation's own page, is being built; empty until it lands.
-- [**website-godolint**](https://github.com/forkcloser/website-godolint) — the website
-  for godolint at [godolint.forkcloser.org](https://godolint.forkcloser.org/): two static
-  pages, no build step, no third-party requests, the sample Dockerfile on the landing page
-  annotated by the pinned `godolint` itself.
-- [**website-taciturn**](https://github.com/forkcloser/website-taciturn) — the website for
-  taciturn at [taciturn.forkcloser.org](https://taciturn.forkcloser.org/): one static page,
-  no build step, every command on it tested against the pinned release.
+- [**website**](https://github.com/forkcloser/website) — the organisation's site,
+  [www.forkcloser.org](https://www.forkcloser.org/).
+- [**website-godolint**](https://github.com/forkcloser/website-godolint) — godolint's site,
+  [godolint.forkcloser.org](https://godolint.forkcloser.org/).
+- [**website-taciturn**](https://github.com/forkcloser/website-taciturn) — taciturn's site,
+  [taciturn.forkcloser.org](https://taciturn.forkcloser.org/).
 - [**infra**](https://github.com/forkcloser/infra) — the infrastructure behind the
   websites, as code: one zone per domain, one block per site; OpenTofu holds the
   Cloudflare Pages projects and their domains, and `dnsctl`, a Go program in the
