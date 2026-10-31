@@ -1,27 +1,30 @@
 <!--
 Thanks for the pull request.
 
-The title and this body become the squash commit message — write them for someone
-reading `git log` in two years, not for the review thread.
+The title is the release note: it says what lands, for someone reading the release page.
+The description is read by someone who was not in the review, a year on: what changed and
+why in the terms of the code, every reference resolving from the page alone. Leave out a
+section with nothing to say.
 -->
 
-## What
+🎯 **Why**
 
-<!-- What changes, in one or two sentences. -->
+<!-- The defect, the gap or the requirement, in the system's terms, and what it costs. -->
 
-## Why
+🛠️ **What**
+
+<!-- What changes, by file, package or component, as a reader checks it against the diff. -->
+
+🧪 **How**
 
 <!--
-The reason, not the diff. What was broken, what was missing, what decision changed.
-Link the issue it closes: "Closes #123".
+How the change answers the why, and how that was verified: the test, the command, the
+document. "just lint && just test green" is a fine answer; "should work" is not.
 -->
 
-## How it was verified
+💡 **Follow-ups**
 
-<!--
-What you actually ran or observed. "just lint && just test" is a fine answer.
-"Should work" is not.
--->
+<!-- What this leaves for later, and why it was not done here. -->
 
 ---
 
