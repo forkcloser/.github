@@ -19,7 +19,7 @@ test:
 # fallback, so a broken one breaks issue creation in every repository that has
 # no templates of its own.
 #
-# Shell plus the aqua-pinned yq: no unpinned interpreter, and shellcheck lints
+# Shell plus the pinned yq: no unpinned interpreter, and shellcheck lints
 # the script like any other we ship.
 issue-forms:
     @.github/scripts/validate-issue-forms.sh

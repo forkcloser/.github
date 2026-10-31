@@ -6,7 +6,7 @@
 # second, worse implementation:
 #
 #   * YAML parses and is formatted      -> `just do lint yaml`   (yamlfmt)
-#   * links resolve                     -> `just do lint links`  (lychee)
+#   * links resolve                     -> `just do security links`  (lychee)
 #   * the mandatory files are present   -> `just do lint limen`
 #
 # What none of them can see is that a *well-formed* YAML file is a *valid issue
@@ -14,7 +14,7 @@
 # it just refuses to render the form, and issue creation breaks for every
 # repository in the organization that inherits it.
 #
-# Everything here runs on the aqua-pinned yq plus the shell the other recipes
+# Everything here runs on the pinned yq plus the shell the other recipes
 # already use — no interpreter that is not pinned, and shellcheck lints it like
 # any other script we ship.
 #
@@ -142,8 +142,8 @@ main() {
     local count=0
     local file name parse_error
 
-    # Preflight. Without it, a yq that cannot run at all (missing, or an aqua
-    # policy that has not been authorized in this directory) surfaces once per
+    # Preflight. Without it, a yq that cannot run at all (missing, or a hermetic
+    # policy that has not been allowed for this directory) surfaces once per
     # file as "is not valid YAML" — a toolchain problem wearing the costume of
     # content corruption, which is a genuinely expensive thing to debug.
     if ! yq --version >/dev/null 2>&1; then
