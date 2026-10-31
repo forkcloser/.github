@@ -14,7 +14,6 @@ It contains:
   - `GOVERNANCE.md`
   - `SECURITY.md` — where a flaw goes when the code is upstream's, and private vulnerability reporting when it is ours
   - `SUPPORT.md`
-  - `FUNDING.yml`
 
 These defaults apply to every repository in the organization that does not provide its own.
 GitHub only resolves them from a **public** `.github` repository, and only from the root,
