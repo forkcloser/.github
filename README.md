@@ -33,8 +33,6 @@ organization changes the answer:
   divergent one. A flaw in our changes uses private vulnerability reporting here.
 - **The bug template asks whether the bug reproduces upstream.** It is the single most useful
   triage question in a fork.
-- **`CONTRIBUTING.md` does not claim every repository runs `just`.** Only enrolled
-  repositories do; a fork keeps upstream's build precisely so patches stay easy to send back.
 
 ## Caveats worth knowing
 
@@ -55,29 +53,29 @@ This repository is [`limen`](https://github.com/farcloser/limen)-enrolled, so th
 the usual one:
 
 ```
-just lint      # limen, just, aqua, links, yaml, shell, dockerfile, commits, issue-forms
+just lint      # limen, just, aqua, yaml, shell, dockerfile, commits, issue-forms
+just security  # links, and the scans
 just fix
 ```
 
-`just do lint <recipe>` runs a single check. The toolchain is pinned through aqua and
-installed on first use; nothing needs to be set up by hand. Note that most *other*
-repositories in this organization are not enrolled — see `CONTRIBUTING.md` for why.
+`just do lint <recipe>` runs a single check. The tools are pinned in
+`.hermetic/hermetic.yaml` and fetched on first use; nothing needs to be set up by hand.
 
 ### issue-forms
 
 The one project-specific recipe. `do lint yaml` proves the templates parse and are
-formatted, and `do lint links` (lychee) proves the links resolve — but neither can tell
+formatted, and `do security links` (lychee) proves the links resolve — but neither can tell
 that a well-formed YAML file is a *valid issue form*. GitHub fails that silently: it does
 not reject the file, it just refuses to render the form. Since these templates are the
 org-wide fallback, a broken one breaks issue creation in every repository that has none of
 its own. `.github/scripts/validate-issue-forms.sh` checks them against the form schema —
-shell plus the aqua-pinned `yq`, so it introduces no interpreter the toolchain does not
+shell plus the pinned `yq`, so it introduces no interpreter the toolchain does not
 already pin, and `do lint shell` lints it like any other script we ship.
 
 ### If you ever list a private repository
 
 `profile/README.md` currently lists only public repositories, so there is no root
-`.lychee.toml`. If a private one is ever added, mark it 🔒 in the profile *and* exclude it in
-a new root `.lychee.toml`: lychee runs unauthenticated — that is the point, it sees what an
+`.lint-links.toml`. If a private one is ever added, mark it 🔒 in the profile *and* exclude it
+in a new root `.lint-links.toml`: lychee runs unauthenticated — that is the point, it sees what an
 anonymous visitor sees — so the link would otherwise 404 and fail the run. Only ever exclude
 a repository that is private **on purpose**; an entry there silences a real check.

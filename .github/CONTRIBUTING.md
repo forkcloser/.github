@@ -92,23 +92,21 @@ use the body to explain *why* — the diff already says what.
 - **CI must be green.** Required status checks block the merge button. Do not ask for an
   exception; fix the check or explain why the check is wrong.
 - **Force-pushing your own branch is fine** and often the right move after review; use
-  `git push --force-with-lease`. Force-push and deletion are blocked on `main` only.
+  `git push --force-with-lease`. Force-push and deletion are blocked on `main` and on the
+  release tags (`v*`), nowhere else.
 - **New to this?** [GIT.md](https://github.com/farcloser/.github/blob/main/.github/GIT.md)
   is the companion: amending, rebasing, editing a commit in the middle of a branch,
   force-pushing safely.
 
 ## Before you open it
 
-Run the project's own checks. **Repositories here differ**, deliberately — a fork keeps
-upstream's build so our patches stay easy to send back, and rebuilding it in our own shape
-would be the first step toward a divergence nobody can merge. Check the README, then:
-
-- **If the repository has a `.justfile`** it is governed by
-  [`limen`](https://github.com/farcloser/limen), and `just lint` / `just test` run the same
-  pinned tooling CI runs — green locally means green in CI. `just --list` shows the rest, and
-  `aqua` fetches the tools on first use, so there is nothing to install by hand.
-- **Otherwise it uses upstream's setup.** For the Go forks that means the ordinary
-  `go build ./...`, `go test ./...`, and whatever linter config the repository ships.
+Run the checks CI runs. Every repository here is governed by
+[`limen`](https://github.com/farcloser/limen): `just lint` and `just test` run the same
+pinned tooling CI runs, so green locally means green in CI, and `just --list` shows the rest.
+The tools are pinned in the repository's `.hermetic/hermetic.yaml` and fetched on first use
+by [hermetic](https://github.com/forkcloser/hermetic), which
+[limen-install](https://github.com/farcloser/limen-install) installs; nothing else is set up
+by hand.
 
 If a check fails on code you did not touch, say so in the pull request; that is our bug, not
 yours.
