@@ -39,7 +39,7 @@ inheriting them is the whole point.
       [CONTRIBUTING.md](https://github.com/forkcloser/.github/blob/main/.github/CONTRIBUTING.md)
 - [ ] Commits are cryptographically signed (`commit.gpgsign`), and my key is in
       `.lint-signers`
-- [ ] Subject lines are under 90 characters, no trailing whitespace
+- [ ] CI is green
 - [ ] Branch is rebased on `main` (no merge commits)
 - [ ] This is not a security fix — those go through
       [private vulnerability reporting](https://github.com/forkcloser/.github/blob/main/.github/SECURITY.md),
