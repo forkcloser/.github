@@ -1,50 +1,25 @@
 # .github
 
-This is the provisioning profile for the Forkcloser organization on GitHub — the home of the
-friendly forks we maintain.
+This repository is the provisioning profile for the Forkcloser organization on GitHub.
 
 It contains:
 
-- `profile/README.md` — the organization profile page shown on https://github.com/forkcloser
-- `.github/ISSUE_TEMPLATE/` — shared issue templates (bug, feature request, question) and their config
-- `.github/PULL_REQUEST_TEMPLATE.md` — the default pull request body
+- `profile/README.md`: the organization profile page shown on https://github.com/forkcloser
+- `.github/ISSUE_TEMPLATE/`: shared issue templates (bug, feature request, question) and their config
+- `.github/PULL_REQUEST_TEMPLATE.md`: the default pull request body
 - community health files applied org-wide:
-  - `CODE_OF_CONDUCT.md`
-  - `CONTRIBUTING.md` — upstream-first, then the DCO terms, mandatory commit signing, and commit rules
-  - `GOVERNANCE.md`
-  - `SECURITY.md` — where a flaw goes when the code is upstream's, and private vulnerability reporting when it is ours
-  - `SUPPORT.md`
+  - `CODE_OF_CONDUCT.md`: acceptable behavior
+  - `CONTRIBUTING.md`: tooling, rules, etc
+  - `GOVERNANCE.md`: how the org is governed
+  - `SECURITY.md`: vulnerability reporting process
+  - `SUPPORT.md`: defining support
 
-These defaults apply to every repository in the organization that does not provide its own.
-GitHub only resolves them from a **public** `.github` repository, and only from the root,
-`.github/` or `docs/`.
+These defaults apply to every repository in the organization.
 
-## What is different from farcloser
+## What is different with Forkcloser
 
-This repository is a port of [`farcloser/.github`](https://github.com/farcloser/.github), and
-the machinery is deliberately identical. The *content* differs wherever being a fork
-organization changes the answer:
-
-- **`CONTRIBUTING.md` leads with "does this belong upstream?"** A change that lands upstream
-  is one we eventually delete from the fork, so it is the outcome we want.
-- **`SECURITY.md` splits by whose code it is.** A flaw inherited from upstream goes upstream
-  first — their fix protects everyone, and we would rather take their patch than ship a
-  divergent one. A flaw in our changes uses private vulnerability reporting here.
-- **The bug template asks whether the bug reproduces upstream.** It is the single most useful
-  triage question in a fork.
-
-## Caveats worth knowing
-
-- The org profile README is read from `profile/README.md` only — that path is not
-  configurable and has no fallback.
-- Issue templates are inherited **all or nothing**: GitHub's own wording is that if a
-  repository has any files in its own `.github/ISSUE_TEMPLATE` folder, *none* of the
-  contents of the default folder are used.
-- `dependabot.yml`, `CODEOWNERS` and workflows are **not** inherited org-wide. Renovate
-  covers dependency updates; `limen` distributes the canonical workflows by pinning them
-  into each repository.
-- A default `LICENSE` cannot be inherited either — the one here covers this repository only.
-  Forks carry upstream's licence, which is not ours to change.
+* `CONTRIBUTING.md` and `SECURITY.md` define the relationship with upstreams.
+* The bug template asks whether the bug reproduces upstream.
 
 ## Working on it
 
@@ -52,29 +27,14 @@ This repository is [`limen`](https://github.com/farcloser/limen)-enrolled, so th
 the usual one:
 
 ```
-just lint      # limen, just, aqua, yaml, shell, dockerfile, commits, issue-forms
-just security  # links, and the scans
+just lint
+just security
 just fix
 ```
-
-`just do lint <recipe>` runs a single check. The tools are pinned in
-`.hermetic/hermetic.yaml` and fetched on first use; nothing needs to be set up by hand.
-
-### issue-forms
-
-The one project-specific recipe. `do lint yaml` proves the templates parse and are
-formatted, and `do security links` (lychee) proves the links resolve — but neither can tell
-that a well-formed YAML file is a *valid issue form*. GitHub fails that silently: it does
-not reject the file, it just refuses to render the form. Since these templates are the
-org-wide fallback, a broken one breaks issue creation in every repository that has none of
-its own. `.github/scripts/validate-issue-forms.sh` checks them against the form schema —
-shell plus the pinned `yq`, so it introduces no interpreter the toolchain does not
-already pin, and `do lint shell` lints it like any other script we ship.
 
 ### If you ever list a private repository
 
 `profile/README.md` currently lists only public repositories, so there is no root
 `.lint-links.toml`. If a private one is ever added, mark it 🔒 in the profile *and* exclude it
-in a new root `.lint-links.toml`: lychee runs unauthenticated — that is the point, it sees what an
-anonymous visitor sees — so the link would otherwise 404 and fail the run. Only ever exclude
-a repository that is private **on purpose**; an entry there silences a real check.
+in a new root `.lint-links.toml`: lychee runs unauthenticated, so the link would otherwise 404
+and fail the run.

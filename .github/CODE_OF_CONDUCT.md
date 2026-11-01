@@ -11,8 +11,5 @@ otherwise.
 If someone is being an ass, tell the maintainers privately rather than escalating in the
 thread: **report@farcloser.world**.
 
-Do not use GitHub's security advisories for this — those are for vulnerabilities, and a
-conduct report filed there reaches the wrong workflow.
-
 Reports are read by a human. Consequences range from "a word about it" to a block from the
 organization, at the maintainers' discretion.
