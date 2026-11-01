@@ -9,17 +9,17 @@ It contains:
 - `.github/PULL_REQUEST_TEMPLATE.md`: the default pull request body
 - community health files applied org-wide:
   - `CODE_OF_CONDUCT.md`: acceptable behavior
-  - `CONTRIBUTING.md`: tooling, rules, etc
+  - `CONTRIBUTING.md`: how to contribute
   - `GOVERNANCE.md`: how the org is governed
   - `SECURITY.md`: vulnerability reporting process
   - `SUPPORT.md`: defining support
 
-These defaults apply to every repository in the organization.
+These defaults apply to every repository in the organization that has none of its own.
 
 ## What is different with Forkcloser
 
-* `CONTRIBUTING.md` and `SECURITY.md` define the relationship with upstreams.
-* The bug template asks whether the bug reproduces upstream.
+- `CONTRIBUTING.md` and `SECURITY.md` define the relationship with upstreams.
+- The bug template asks whether the bug reproduces upstream.
 
 ## Working on it
 

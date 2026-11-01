@@ -44,7 +44,8 @@ upstream since, and every fix and feature upstream does not have.
   [Code-Hex/vz](https://github.com/Code-Hex/vz), the Go binding for Apple's
   Virtualization.framework, for the hosts ossein and zerogravity run on (recent macOS with Apple silicon).
 - [**xz**](https://github.com/forkcloser/xz) — a fork of
-  [ulikunitz/xz](https://github.com/ulikunitz/xz).
+  [ulikunitz/xz](https://github.com/ulikunitz/xz), a pure-Go reader and writer for the xz
+  format.
 - [**yamlfmt**](https://github.com/forkcloser/yamlfmt) — a fork of
   [google/yamlfmt](https://github.com/google/yamlfmt), a YAML formatter as a command line
   and a library.
