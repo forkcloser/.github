@@ -22,5 +22,5 @@ packages:
     registry: local
   # --- toolchain + binary-release tools (standard registry, aqua-verified) ---
   - name: mikefarah/yq@v4.54.2
-  - name: golang/go@go1.27.3
+  - name: golang/go@go1.27.4
   - import: ../.limen/hermetic.yaml
